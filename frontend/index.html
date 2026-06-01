@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>TD-17 Drum Overlay</title>
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    <main class="overlay">
+      <section class="top-bar">
+        <div>
+          <div class="eyebrow">ROLAND TD-17</div>
+          <div id="statusText" class="status offline">检测中...</div>
+        </div>
+        <div id="statusDot" class="status-dot offline"></div>
+      </section>
+
+      <section class="hero">
+        <div class="hero-main">
+          <div class="eyebrow">LAST HIT</div>
+          <div id="lastPart" class="last-part">WAITING</div>
+          <div id="lastZone" class="last-zone">等待 MIDI 输入</div>
+        </div>
+
+        <div class="hero-side">
+          <div class="metric">
+            <span>VEL</span>
+            <strong id="velocityText">-</strong>
+          </div>
+          <div class="metric">
+            <span>NOTE</span>
+            <strong id="noteText">-</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="velocity-section">
+        <div class="velocity-head">
+          <span>VELOCITY</span>
+          <span id="rawText">raw -</span>
+        </div>
+        <div class="velocity-track">
+          <div id="velocityBar" class="velocity-fill"></div>
+        </div>
+      </section>
+
+      <section class="kit-grid">
+        <button class="pad cymbal" data-part="crash1">
+          <span>CRASH 1</span>
+          <em id="pad-crash1">idle</em>
+        </button>
+
+        <button class="pad cymbal" data-part="hihat">
+          <span>HI-HAT</span>
+          <em id="pad-hihat">idle</em>
+        </button>
+
+        <button class="pad cymbal" data-part="ride">
+          <span>RIDE</span>
+          <em id="pad-ride">idle</em>
+        </button>
+
+        <button class="pad cymbal" data-part="crash2">
+          <span>CRASH 2</span>
+          <em id="pad-crash2">idle</em>
+        </button>
+
+        <button class="pad drum" data-part="tom1">
+          <span>TOM 1</span>
+          <em id="pad-tom1">idle</em>
+        </button>
+
+        <button class="pad drum" data-part="tom2">
+          <span>TOM 2</span>
+          <em id="pad-tom2">idle</em>
+        </button>
+
+        <button class="pad drum" data-part="tom3">
+          <span>FLOOR TOM</span>
+          <em id="pad-tom3">idle</em>
+        </button>
+
+        <button class="pad drum primary" data-part="snare">
+          <span>SNARE</span>
+          <em id="pad-snare">idle</em>
+        </button>
+
+        <button class="pad drum primary" data-part="kick">
+          <span>KICK</span>
+          <em id="pad-kick">idle</em>
+        </button>
+      </section>
+
+      <section class="hihat-section">
+        <div class="hihat-row">
+          <span>HI-HAT PEDAL</span>
+          <strong id="hihatText">unknown</strong>
+        </div>
+        <div class="hihat-track">
+          <div id="hihatBar" class="hihat-fill"></div>
+        </div>
+      </section>
+
+      <section class="log-section">
+        <div class="eyebrow">EVENT LOG</div>
+        <div id="eventLog" class="event-log"></div>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
