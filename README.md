@@ -4,6 +4,8 @@ A lightweight real-time MIDI monitor and browser overlay backend for Roland TD-1
 
 This project listens to MIDI input from a Roland TD-17 drum module, parses basic drum hit events, and sends them to a browser-based frontend through WebSocket. It is intended for drum practice visualization, livestream overlays, and later expansion into camera-aligned drum hit effects.
 
+<img src="preview.png" style="width: 50vw"/>
+
 ## Features
 
 - Detect Roland TD-17 MIDI connection status
