@@ -12,7 +12,11 @@ This project listens to MIDI input from a Roland TD-17 drum module, parses basic
 - Listen to real-time MIDI input
 - Display recent drum hits, note number, velocity, and raw MIDI bytes
 - Read hi-hat pedal state from MIDI CC#4
-- Basic visual feedback for kick, snare, toms, hi-hat, crash, and ride
+- Camera-aligned 2D overlay for kick, snare, toms, hi-hat, crash, and ride
+- Manual calibration for each projected drum/cymbal region
+- Adjustable position, width, height, and rotation for overlay pads
+- Transparent contour-grid hit animations designed for camera overlays
+- OBS-friendly transparent overlay mode
 - Runs as a local web app
 - Can be used in OBS as a Browser Source
 - Can be shared temporarily through Cloudflare Tunnel
@@ -26,15 +30,18 @@ Currently implemented:
 - TD-17 MIDI device detection
 - Basic MIDI event parsing
 - WebSocket communication between backend and frontend
-- Simple browser-based HUD display
+- Browser-based HUD display
+- Camera-aligned transparent overlay surface
+- Per-pad ellipse calibration stored in browser local storage
+- Independent hit pulse layers for fast repeated strokes
+- OBS overlay mode with a minimal control toggle
 
 Planned:
 
-- Camera-aligned 2D drum overlay
-- Manual layout calibration
-- Per-drum hit animations
 - Better TD-17 note mapping customization
-- OBS-friendly transparent overlay mode
+- Import/export for calibrated overlay layouts
+- More per-kit overlay presets
+- Optional camera/background preview while calibrating
 
 ## Requirements
 
@@ -105,6 +112,34 @@ Add a Browser Source in OBS and use:
 ```text
 http://localhost:8765
 ```
+
+For the transparent overlay view, use:
+
+```text
+http://localhost:8765/?overlay
+```
+
+In overlay mode, the control panel is hidden by default. Use the small `MENU` control in the corner to show it again.
+
+### Overlay Calibration
+
+Open the normal page first:
+
+```text
+http://localhost:8765
+```
+
+Use `CAL` to enter calibration mode. Each drum/cymbal overlay is represented as a projected ellipse:
+
+- Drag the ellipse body to move it.
+- Drag the right handle to adjust width.
+- Drag the bottom handle to adjust height.
+- Drag the lower-right handle to adjust width and height together.
+- Drag the upper handle to rotate the ellipse.
+- Use `SIZE` for global overlay scale.
+- Use `RST` to reset the saved layout.
+
+The calibrated layout is saved in the browser's local storage. It is intended to line up with a fixed camera angle, so keep the camera and drum kit position stable after calibration.
 
 For local network access, make sure the backend listens on `0.0.0.0`, then open:
 

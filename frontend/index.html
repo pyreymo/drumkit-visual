@@ -2,109 +2,158 @@
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>TD-17 Drum Overlay</title>
     <link rel="stylesheet" href="/static/style.css" />
   </head>
   <body>
-    <main class="overlay">
-      <section class="top-bar">
-        <div>
-          <div class="eyebrow">ROLAND TD-17</div>
-          <div id="statusText" class="status offline">检测中...</div>
-        </div>
-        <div id="statusDot" class="status-dot offline"></div>
-      </section>
+    <main class="overlay-shell">
+      <button
+        id="panelToggleButton"
+        class="panel-toggle"
+        type="button"
+        title="Show controls"
+        aria-expanded="true"
+      >
+        MENU
+      </button>
 
-      <section class="hero">
-        <div class="hero-main">
-          <div class="eyebrow">LAST HIT</div>
-          <div id="lastPart" class="last-part">WAITING</div>
-          <div id="lastZone" class="last-zone">等待 MIDI 输入</div>
-        </div>
-
-        <div class="hero-side">
-          <div class="metric">
-            <span>VEL</span>
-            <strong id="velocityText">-</strong>
-          </div>
-          <div class="metric">
-            <span>NOTE</span>
-            <strong id="noteText">-</strong>
-          </div>
-        </div>
-      </section>
-
-      <section class="velocity-section">
-        <div class="velocity-head">
-          <span>VELOCITY</span>
-          <span id="rawText">raw -</span>
-        </div>
-        <div class="velocity-track">
-          <div id="velocityBar" class="velocity-fill"></div>
-        </div>
-      </section>
-
-      <section class="kit-grid">
-        <button class="pad cymbal" data-part="crash1">
+      <section class="stage" id="stage">
+        <button class="stage-pad cymbal" data-part="crash1">
           <span>CRASH 1</span>
-          <em id="pad-crash1">idle</em>
+          <em id="stage-crash1">idle</em>
         </button>
-
-        <button class="pad cymbal" data-part="hihat">
+        <button class="stage-pad cymbal" data-part="hihat">
           <span>HI-HAT</span>
-          <em id="pad-hihat">idle</em>
+          <em id="stage-hihat">idle</em>
         </button>
-
-        <button class="pad cymbal" data-part="ride">
+        <button class="stage-pad cymbal" data-part="ride">
           <span>RIDE</span>
-          <em id="pad-ride">idle</em>
+          <em id="stage-ride">idle</em>
         </button>
-
-        <button class="pad cymbal" data-part="crash2">
+        <button class="stage-pad cymbal" data-part="crash2">
           <span>CRASH 2</span>
-          <em id="pad-crash2">idle</em>
+          <em id="stage-crash2">idle</em>
         </button>
-
-        <button class="pad drum" data-part="tom1">
+        <button class="stage-pad drum" data-part="tom1">
           <span>TOM 1</span>
-          <em id="pad-tom1">idle</em>
+          <em id="stage-tom1">idle</em>
         </button>
-
-        <button class="pad drum" data-part="tom2">
+        <button class="stage-pad drum" data-part="tom2">
           <span>TOM 2</span>
-          <em id="pad-tom2">idle</em>
+          <em id="stage-tom2">idle</em>
         </button>
-
-        <button class="pad drum" data-part="tom3">
+        <button class="stage-pad drum" data-part="tom3">
           <span>FLOOR TOM</span>
-          <em id="pad-tom3">idle</em>
+          <em id="stage-tom3">idle</em>
         </button>
-
-        <button class="pad drum primary" data-part="snare">
+        <button class="stage-pad drum primary" data-part="snare">
           <span>SNARE</span>
-          <em id="pad-snare">idle</em>
+          <em id="stage-snare">idle</em>
         </button>
-
-        <button class="pad drum primary" data-part="kick">
+        <button class="stage-pad drum primary" data-part="kick">
           <span>KICK</span>
-          <em id="pad-kick">idle</em>
+          <em id="stage-kick">idle</em>
         </button>
       </section>
 
-      <section class="hihat-section">
-        <div class="hihat-row">
-          <span>HI-HAT PEDAL</span>
-          <strong id="hihatText">unknown</strong>
-        </div>
-        <div class="hihat-track">
-          <div id="hihatBar" class="hihat-fill"></div>
-        </div>
-      </section>
+      <aside class="control-panel">
+        <section class="top-bar">
+          <div>
+            <div class="eyebrow">ROLAND TD-17</div>
+            <div id="statusText" class="status offline">检测中...</div>
+          </div>
+          <div class="top-actions">
+            <div id="statusDot" class="status-dot offline"></div>
+            <button
+              id="panelCloseButton"
+              class="panel-close"
+              type="button"
+              title="Hide controls"
+              aria-label="Hide controls"
+            >
+              -
+            </button>
+          </div>
+        </section>
 
-      <section class="log-section">
-        <div class="eyebrow">EVENT LOG</div>
-        <div id="eventLog" class="event-log"></div>
-      </section>
+        <section class="controls">
+          <button
+            id="calibrateButton"
+            class="tool-button"
+            type="button"
+            title="Toggle calibration"
+            aria-pressed="false"
+          >
+            CAL
+          </button>
+          <button
+            id="overlayButton"
+            class="tool-button"
+            type="button"
+            title="Toggle transparent overlay preview"
+            aria-pressed="false"
+          >
+            OBS
+          </button>
+          <button
+            id="resetLayoutButton"
+            class="tool-button"
+            type="button"
+            title="Reset layout"
+          >
+            RST
+          </button>
+          <label class="scale-control">
+            <span>SIZE</span>
+            <input id="padScaleInput" type="range" min="70" max="145" value="100" />
+          </label>
+        </section>
+
+        <section class="hero">
+          <div class="hero-main">
+            <div class="eyebrow">LAST HIT</div>
+            <div id="lastPart" class="last-part">WAITING</div>
+            <div id="lastZone" class="last-zone">等待 MIDI 输入</div>
+          </div>
+
+          <div class="hero-side">
+            <div class="metric">
+              <span>VEL</span>
+              <strong id="velocityText">-</strong>
+            </div>
+            <div class="metric">
+              <span>NOTE</span>
+              <strong id="noteText">-</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="velocity-section">
+          <div class="velocity-head">
+            <span>VELOCITY</span>
+            <span id="rawText">raw -</span>
+          </div>
+          <div class="velocity-track">
+            <div id="velocityBar" class="velocity-fill"></div>
+          </div>
+        </section>
+
+        <section class="hihat-section">
+          <div class="hihat-row">
+            <span>HI-HAT PEDAL</span>
+            <strong id="hihatText">unknown</strong>
+          </div>
+          <div class="hihat-track">
+            <div id="hihatBar" class="hihat-fill"></div>
+          </div>
+        </section>
+
+        <section class="log-section">
+          <div class="eyebrow">EVENT LOG</div>
+          <div id="eventLog" class="event-log"></div>
+        </section>
+      </aside>
     </main>
 
     <script src="/static/app.js"></script>
